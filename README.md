@@ -1,14 +1,9 @@
-/ ->home
-/join
-/login
-/search
+## youtube clone project
 
-/users/:id -> see user
-/users/logout 
-/users/edit -> edit my profile
-/users/delete
+  useing this... 
+  * node.js
+  * mongoDB
+  * pug
+  
+  upadate readme later! 
 
-/videos/:id -> see video
-/videos/:id/edit -> edit video
-/videos/:id/delete -> delete video
-/videds/upload

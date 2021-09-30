@@ -46,7 +46,39 @@ export const deleteVideo = (req, res) => res.send("delete video page");
 export const getUpload = (req, res) => {
   return res.render("upload", { pageTitle: "upload video" });
 };
-export const postUpload = (req, res) => {
+export const postUpload = async(req, res) => {
   //here we will add a video to the videos array
+  const {title, description, hashtags} = req.body;
+  console.log(title, description ,hashtags)
+  //1. document 를 만들어야 함 
+  // const video = new Video({
+  //   title, 
+  //   description, 
+  //   createAt:Date.now(),
+  //   hashtags:hashtags.split(',').map((word)=>`#${word}`),
+  //   meta:{
+  //     views:0,
+  //     rating:0
+  //   }
+  // })
+  //1. new object , save ===2. model.create
+  try{
+  await Video.create({
+    title, 
+    description, 
+    hashtags:hashtags.split(',').map((word)=>`#${word}`),
+  })}
+  //createAt이랑 meta 는 default 값이 있어서 따로 안넣어줘도 됨. 
+  catch(error){
+    
+    return res.render("upload", { 
+      pageTitle: "upload video",
+      errorMsg:error._message });
+  }
+ //await video.save();
+  //save()도 promise 를 반환하기 때문에 기다려 줘야 함. 
+  //split(조건) seperated string
+
+  // schema 에 required 를 적어놓지 않으면 데이터를 다 주지 않더라도 에러가 나지 않음. 
   return res.redirect("/");
 };
